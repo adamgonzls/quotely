@@ -4,7 +4,7 @@ import logo from './logo.svg'
 import './App.css'
 
 function App() {
-  const [randomQuoteObj, setRandomQuoteObj] = useState({
+  const [randomQuoteData, setRandomQuoteData] = useState({
     author: 'Gail Sheehy',
     id: null,
     profession: '',
@@ -12,41 +12,52 @@ function App() {
     backgroundImageURL:
       'https://images.unsplash.com/photo-1545431781-3e1b506e9a37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc3NzE0NjY&ixlib=rb-1.2.1&q=80&w=1080',
   })
-  const [allQuotesData, setAllQuotesData] = useState([])
-  const [unsplashImagesArray, setUnsplashImagesArray] = useState([])
+  const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
+  const [unsplashDataFromAPI, setUnsplashDataFromAPI] = useState([])
 
-  console.log(randomQuoteObj)
-  console.log(unsplashImagesArray)
+  // console.log(randomQuoteData)
+  // console.log(unsplashDataFromAPI)
 
   useEffect(() => {
-    fetch(`https://adams-quote-api-v1.herokuapp.com/quotes`)
-      .then((res) => res.json())
-      .then((data) => setAllQuotesData(data))
+    async function getQuotesFromAPI() {
+      const res = await fetch(`https://adams-quote-api-v1.herokuapp.com/quotes`)
+      const data = await res.json()
+      setAllQuotesDataFromAPI(data)
+    }
+    getQuotesFromAPI()
   }, [])
 
   useEffect(() => {
-    console.log('initial call to unsplash API')
-    fetch(
-      `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
-    )
-      .then((res) => res.json())
-      .then((data) => setUnsplashImagesArray(data))
-    // getRandomUnsplashImage()
+    console.log('useEffect initial call to unsplash API')
+    async function getUnsplashImages() {
+      const res = await fetch(
+        `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
+      )
+      const data = await res.json()
+      setUnsplashDataFromAPI(data)
+    }
+    getUnsplashImages()
   }, [])
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('interval call to getRandomImageFromArray()')
+  //     getRandomImageFromArray()
+  //   }, 5000)
+  //   // return () => clearInterval(interval)
+  // }, [])
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('interval call to getRandomUnsplashImage()')
-      getRandomUnsplashImage()
-    }, 20000)
-    return () => clearInterval(interval)
-  }, [])
+    getRandomImageFromArray()
+  }, [unsplashDataFromAPI])
 
   function handleGetRandomQuote() {
     const randomQuoteData =
-      allQuotesData[Math.floor(Math.random() * allQuotesData.length)]
-    console.log(randomQuoteData)
-    setRandomQuoteObj((prevData) => {
+      allQuotesDataFromAPI[
+        Math.floor(Math.random() * allQuotesDataFromAPI.length)
+      ]
+
+    setRandomQuoteData((prevData) => {
       return {
         ...prevData,
         author: randomQuoteData.author ? randomQuoteData.author : '',
@@ -59,16 +70,22 @@ function App() {
     })
   }
 
-  function getRandomUnsplashImage() {
+  function getRandomImageFromArray() {
     console.log('give me a random image')
+    console.log(
+      unsplashDataFromAPI.length === 0
+        ? 'unsplash array is empty'
+        : unsplashDataFromAPI
+    )
     const randomImage =
-      unsplashImagesArray[
-        Math.floor(Math.random() * unsplashImagesArray.length)
+      unsplashDataFromAPI[
+        Math.floor(Math.random() * unsplashDataFromAPI.length)
       ]
-    console.log(unsplashImagesArray)
-    console.log(randomImage.urls.regular)
-    const randomImageURL = randomImage.urls.regular
-    setRandomQuoteObj((prevData) => {
+    console.log(randomImage)
+    // const randomImageURL = randomImage.urls.regular
+    const randomImageURL = 'foo'
+    console.log(randomImageURL)
+    setRandomQuoteData((prevData) => {
       return {
         ...prevData,
         backgroundImageURL: randomImageURL,
@@ -81,13 +98,13 @@ function App() {
       <Header handleGetRandomQuote={handleGetRandomQuote} />
       <main
         style={{
-          backgroundImage: `url(${randomQuoteObj.backgroundImageURL})`,
+          backgroundImage: `url(${randomQuoteData.backgroundImageURL})`,
         }}
       >
         <div className='quoteContainer'>
-          <h1>{randomQuoteObj.quote}</h1>
-          <p>-{randomQuoteObj.author}</p>
-          {randomQuoteObj.profession && <p>{randomQuoteObj.profession}</p>}
+          <h1>{randomQuoteData.quote}</h1>
+          <p>-{randomQuoteData.author}</p>
+          {randomQuoteData.profession && <p>{randomQuoteData.profession}</p>}
         </div>
       </main>
     </div>
