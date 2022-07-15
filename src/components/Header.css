@@ -3,4 +3,6 @@ header {
   top: 0;
   right: 0;
   left: 0;
+  text-align: left;
+  padding-left: var(--content-padding);
 }

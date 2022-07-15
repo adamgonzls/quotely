@@ -1,3 +1,28 @@
+:root {
+  --white: #fff;
+  --see-through-black: rgba(0, 0, 0, 0.55);
+
+  --content-padding: 1em;
+  --h1: 1.5em;
+  --h1-width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+  :root {
+    --content-padding: 4em;
+    --h1: 1.75em;
+    --h1-width: 80%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  :root {
+    --content-padding: 5em;
+    --h1: 2em;
+    --h1-width: 70%;
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -37,8 +62,12 @@
   }
 }
 
-button {
-  font-size: calc(10px + 2vmin);
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
 }
 
 main {
@@ -50,4 +79,56 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.quoteContainer {
+  padding: var(--content-padding);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--see-through-black);
+  background-image: linear-gradient(
+    to top right,
+    rgba(255, 0, 0, 0.25),
+    rgba(200, 0, 200, 0.75)
+  );
+  color: var(--white);
+}
+
+.quote {
+  margin-bottom: 0.5em;
+  text-align: left;
+  font-size: var(--h1);
+  line-height: 1.4;
+  width: var(--h1-width);
+}
+
+.quoteAuthor:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.quoteProfession {
+  margin-bottom: 0;
+  font-size: 0.75em;
+}
+
+.brandButton {
+  margin-top: 1em;
+  border: 2px solid transparent;
+  color: transparent;
+  font-size: 1em;
+  padding: 0.5em;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.brandButton:hover {
+  color: var(--see-through-black);
+  border: 2px solid var(--see-through-black);
+  display: inline-block;
+  /* color: #000; */
+  background-color: rgba(255, 0, 0, 0.25);
 }
