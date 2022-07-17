@@ -1,6 +1,6 @@
 # Quotely
 
-GEt inspired with this app's inspirational quotes.
+Get inspired with this app's inspirational quotes.
 
 <!-- Check it out: [Adam's Portfolio](https://adamgonzales.netlify.app/) -->
 
