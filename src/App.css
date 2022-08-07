@@ -1,10 +1,13 @@
 :root {
   --white: #fff;
   --see-through-black: rgba(0, 0, 0, 0.55);
-
+  --ff-header: 'Cabin', sans-serif;
+  --ff-body: 'Roboto', sans-serif;
   --content-padding: 1em;
   --h1: 1.5em;
   --h1-width: 100%;
+  --paragraph: 0.75em;
+  --sm-paragraph: 0.65em;
 }
 
 @media screen and (min-width: 400px) {
@@ -12,6 +15,8 @@
     --content-padding: 4em;
     --h1: 1.75em;
     --h1-width: 80%;
+    --paragraph: 1em;
+    --sm-paragraph: 0.75em;
   }
 }
 
@@ -19,55 +24,20 @@
   :root {
     --content-padding: 5em;
     --h1: 2em;
-    --h1-width: 70%;
-  }
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    --h1-width: 75%;
+    --paragraph: 1.15em;
+    --sm-paragraph: 0.85em;
   }
 }
 
 h1 {
+  font-family: var(--ff-header);
   margin: 0;
 }
 
 p {
   margin: 0;
+  font-size: var(--paragraph);
 }
 
 main {
@@ -105,30 +75,35 @@ main {
   width: var(--h1-width);
 }
 
+.quoteAuthor {
+  font-size: ;
+}
+
 .quoteAuthor:not(:last-child) {
   margin-bottom: 1em;
 }
 
 .quoteProfession {
   margin-bottom: 0;
-  font-size: 0.75em;
+  font-size: var(--sm-paragraph);
 }
 
 .brandButton {
+  font-family: var(--ff-body);
+  visibility: hidden;
+  opacity: 0;
   margin-top: 1em;
-  border: 2px solid transparent;
-  color: transparent;
+  border: 0.02em solid #ccc;
+  border-radius: 7px;
+  color: #ccc;
   font-size: 1em;
   padding: 0.5em;
-  background: transparent;
+  background-color: rgba(255, 0, 0, 0.25);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.brandButton:hover {
-  color: var(--see-through-black);
-  border: 2px solid var(--see-through-black);
-  display: inline-block;
-  /* color: #000; */
-  background-color: rgba(255, 0, 0, 0.25);
+header:hover > .brandButton {
+  opacity: 1;
+  visibility: visible;
 }

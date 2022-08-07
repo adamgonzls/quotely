@@ -1,8 +1,8 @@
 # Quotely
 
-Get inspired with this app's inspirational quotes.
+A collection of inspirational quotes.
 
-<!-- Check it out: [Adam's Portfolio](https://adamgonzales.netlify.app/) -->
+Check it out: [Quotely](https://quotely.pages.dev/)
 
 ## About this Project
 
@@ -18,7 +18,7 @@ Get inspired with this app's inspirational quotes.
 
 <!-- [Figma design file](https://www.figma.com/file/uMRRCvFNkalcPhBOtRyqXX/Portfolio-v2.5?node-id=2%3A3) -->
 
-<!-- Deployed via [netlify](https://www.netlify.com/) -->
+Deployed via [Cloudflare](https://www.cloudflare.com/)
 
 ## 🧞 Commands
 
@@ -29,11 +29,11 @@ All commands are run from the root of the project, from a terminal:
 | `npm install` | Installs dependencies                       |
 | `npm run dev` | Starts local dev server at `localhost:3000` |
 
-<!-- ## 🚀 Deployment
+## 🚀 Deployment
 
-| Command             | Action                                       |
-| :------------------ | :------------------------------------------- |
-| `npm run build`     | Build your production site to `./dist/`      |
-| `npm run preview`   | Preview your build locally, before deploying |
-| `ntl deploy`        | Deploy to a unique preview URL               |
-| `ntl deploy --prod` | Deploy the site into production              | -->
+[Docs:](https://vitejs.dev/guide/static-deploy.html#cloudflare-pages)
+
+| Command                           | Action                |
+| :-------------------------------- | :-------------------- |
+| `npm run build`                   | Build your site       |
+| `npx wrangler pages publish dist` | Create new deployment |
