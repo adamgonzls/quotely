@@ -3,17 +3,19 @@ import Header from './components/Header.jsx'
 import './App.css'
 
 function App() {
-  const DEFAULT_TIMER = 20
+  const DEFAULT_TIMER = 15
   const [randomQuoteData, setRandomQuoteData] = useState({
     author: 'Gail Sheehy',
     id: null,
     profession: '',
     quote: 'Growth demands a temporary surrender of security',
     backgroundImageURL:
-      'https://images.unsplash.com/photo-1545431781-3e1b506e9a37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc3NzE0NjY&ixlib=rb-1.2.1&q=80&w=1080',
+      'https://images.unsplash.com/photo-1563089145-599997674d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTk4NDM1ODg&ixlib=rb-1.2.1&q=80&w=1080',
   })
   const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
-  const [imagesDataFromAPI, setImagesDataFromAPI] = useState(null)
+  const [imagesData, setImagesData] = useState(
+    JSON.parse(localStorage.getItem('imagesData')) || null
+  )
   const [remainingTime, setRemainingTime] = useState(DEFAULT_TIMER)
 
   useEffect(() => {
@@ -26,18 +28,25 @@ function App() {
   }, [])
 
   useEffect(() => {
-    async function getImagesFromAPI() {
-      const res = await fetch(
-        `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
-      )
-      const data = await res.json()
-      setImagesDataFromAPI(data)
+    if (!imagesData) {
+      console.log('calling images API')
+      async function getImagesFromAPI() {
+        const res = await fetch(
+          `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
+        )
+        const data = await res.json()
+        setImagesData(data)
+      }
+      getImagesFromAPI()
     }
-    getImagesFromAPI()
   }, [])
 
   useEffect(() => {
-    if (!imagesDataFromAPI) {
+    localStorage.setItem('imagesData', JSON.stringify(imagesData))
+  }, [imagesData])
+
+  useEffect(() => {
+    if (!imagesData) {
       return
     }
 
@@ -53,7 +62,7 @@ function App() {
       }, 1000)
       return () => clearTimeout(timer)
     }
-  }, [imagesDataFromAPI, remainingTime])
+  }, [imagesData, remainingTime])
 
   function handleGetRandomQuote() {
     const randomQuoteData =
@@ -77,7 +86,7 @@ function App() {
 
   function handleGetRandomImage() {
     const randomImage =
-      imagesDataFromAPI[Math.floor(Math.random() * imagesDataFromAPI.length)]
+      imagesData[Math.floor(Math.random() * imagesData.length)]
     const randomImageURL = randomImage.urls.regular
     setRandomQuoteData((prevData) => {
       return {
