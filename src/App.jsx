@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     if (!imagesData) {
-      console.log('calling images API')
+      // console.log('calling images API')
       async function getImagesFromAPI() {
         const res = await fetch(
           `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
@@ -57,7 +57,7 @@ function App() {
 
     if (remainingTime > 0) {
       const timer = setTimeout(() => {
-        console.log(remainingTime)
+        // console.log(remainingTime)
         setRemainingTime((prevTime) => prevTime - 1)
       }, 1000)
       return () => clearTimeout(timer)
