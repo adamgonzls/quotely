@@ -3,6 +3,7 @@ import Header from './components/Header.jsx'
 import './App.css'
 
 function App() {
+  const DEFAULT_TIMER = 20
   const [randomQuoteData, setRandomQuoteData] = useState({
     author: 'Gail Sheehy',
     id: null,
@@ -13,6 +14,7 @@ function App() {
   })
   const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
   const [imagesDataFromAPI, setImagesDataFromAPI] = useState(null)
+  const [remainingTime, setRemainingTime] = useState(DEFAULT_TIMER)
 
   useEffect(() => {
     async function getQuotesFromAPI() {
@@ -38,12 +40,20 @@ function App() {
     if (!imagesDataFromAPI) {
       return
     }
-    const interval = setInterval(() => {
-      getRandomImageFromArray()
+
+    if (remainingTime === 0) {
+      handleGetRandomImage()
       handleGetRandomQuote()
-    }, 20000)
-    return () => clearInterval(interval)
-  }, [imagesDataFromAPI])
+    }
+
+    if (remainingTime > 0) {
+      const timer = setTimeout(() => {
+        console.log(remainingTime)
+        setRemainingTime((prevTime) => prevTime - 1)
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [imagesDataFromAPI, remainingTime])
 
   function handleGetRandomQuote() {
     const randomQuoteData =
@@ -62,9 +72,10 @@ function App() {
         quote: randomQuoteData.quote,
       }
     })
+    setRemainingTime(DEFAULT_TIMER)
   }
 
-  function getRandomImageFromArray() {
+  function handleGetRandomImage() {
     const randomImage =
       imagesDataFromAPI[Math.floor(Math.random() * imagesDataFromAPI.length)]
     const randomImageURL = randomImage.urls.regular
@@ -74,11 +85,15 @@ function App() {
         backgroundImageURL: randomImageURL,
       }
     })
+    setRemainingTime(DEFAULT_TIMER)
   }
 
   return (
     <div className='App'>
-      <Header handleGetRandomQuote={handleGetRandomQuote} />
+      <Header
+        handleGetRandomQuote={handleGetRandomQuote}
+        handleGetRandomImage={handleGetRandomImage}
+      />
       <main
         style={{
           backgroundImage: `url(${randomQuoteData.backgroundImageURL})`,
