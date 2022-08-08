@@ -9,5 +9,5 @@ header {
   padding-left: var(--content-padding);
   padding-right: var(--content-padding);
   display: flex;
-  gap: 1em;
+  gap: 0.25em;
 }

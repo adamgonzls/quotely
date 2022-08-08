@@ -15,10 +15,10 @@ export default function Header({
       />
       <div className='buttonContainer'>
         <button className='brandButton' onClick={handleGetRandomQuote}>
-          New Quote
+          New quote
         </button>
         <button className='brandButton' onClick={handleGetRandomImage}>
-          New Image
+          New image
         </button>
       </div>
     </header>

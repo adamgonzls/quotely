@@ -1,5 +1,6 @@
 :root {
   --white: #fff;
+  --off-white: #ccc;
   --see-through-black: rgba(0, 0, 0, 0.55);
   --ff-header: 'Cabin', sans-serif;
   --ff-body: 'Roboto', sans-serif;
@@ -75,10 +76,6 @@ main {
   width: var(--h1-width);
 }
 
-.quoteAuthor {
-  font-size: ;
-}
-
 .quoteAuthor:not(:last-child) {
   margin-bottom: 1em;
 }
@@ -89,18 +86,28 @@ main {
 }
 
 .brandButton {
+  margin-top: 0.25em;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5em;
   font-family: var(--ff-body);
+  font-size: var(--sm-paragraph);
+  color: var(--off-white);
   visibility: hidden;
   opacity: 0;
-  margin-top: 1em;
-  border: 0.02em solid #ccc;
-  border-radius: 7px;
-  color: #ccc;
-  font-size: 1em;
-  padding: 0.5em;
   background-color: rgba(255, 0, 0, 0.25);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 1s ease;
+  box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
+}
+
+.brandButton:hover,
+.brandButton:focus {
+  box-shadow: 0.1em 0.1em 0.1em rgba(1, 1, 1, 0.5);
+}
+
+.brandButton:active {
+  box-shadow: 0.05em 0.05em 0.05em rgba(1, 1, 1, 0.5);
 }
 
 .buttonContainer:hover > .brandButton {
