@@ -10,7 +10,9 @@ export default function ProgressIndicator({ DEFAULT_TIMER, remainingTime }) {
         className='progressIndicator'
         style={{
           width: `${progressWidth}%`,
-          backgroundColor: 'rgba(255, 0, 0, 0.45)',
+          // backgroundColor: 'rgba(255, 0, 0, 0.45)',
+          background:
+            'linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%)',
           height: '.5em',
           transition: 'width .9s ease',
         }}
