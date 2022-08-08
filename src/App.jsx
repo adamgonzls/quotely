@@ -102,6 +102,8 @@ function App() {
       <Header
         handleGetRandomQuote={handleGetRandomQuote}
         handleGetRandomImage={handleGetRandomImage}
+        DEFAULT_TIMER={DEFAULT_TIMER}
+        remainingTime={remainingTime}
       />
       <main
         style={{
