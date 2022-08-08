@@ -1,10 +1,13 @@
 header {
-  padding-left: var(--content-padding);
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  text-align: left;
+}
+
+.buttonContainer {
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
   display: flex;
   gap: 1em;
 }

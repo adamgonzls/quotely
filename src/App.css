@@ -103,7 +103,7 @@ main {
   transition: all 0.3s ease;
 }
 
-header:hover > .brandButton {
+.buttonContainer:hover > .brandButton {
   opacity: 1;
   visibility: visible;
 }

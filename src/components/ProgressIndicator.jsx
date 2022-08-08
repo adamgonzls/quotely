@@ -1,22 +1,18 @@
 import './ProgressIndicator.css'
 
-// pass the seconds as props, then divide the screen width of 100% by the total amount of seconds and the width
 export default function ProgressIndicator({ DEFAULT_TIMER, remainingTime }) {
-  console.log(remainingTime)
   const fullWidth = 100
-
   const progressWidth = fullWidth / (DEFAULT_TIMER / remainingTime)
 
-  // progressIndicator should be the total width (100%) divided by the amount of seconds
-  // progressBar should be remaining seconds
   return (
     <div className='progress'>
       <div
-        className='progress__indicator'
+        className='progressIndicator'
         style={{
           width: `${progressWidth}%`,
-          backgroundColor: 'green',
-          height: '1em',
+          backgroundColor: 'rgba(255, 0, 0, 0.45)',
+          height: '.5em',
+          transition: 'width .9s ease',
         }}
       ></div>
     </div>

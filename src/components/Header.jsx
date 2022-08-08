@@ -13,7 +13,7 @@ export default function Header({
         DEFAULT_TIMER={DEFAULT_TIMER}
         remainingTime={remainingTime}
       />
-      <div>
+      <div className='buttonContainer'>
         <button className='brandButton' onClick={handleGetRandomQuote}>
           New Quote
         </button>
