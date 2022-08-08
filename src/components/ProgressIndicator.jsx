@@ -1,5 +1,3 @@
-import './ProgressIndicator.css'
-
 export default function ProgressIndicator({ DEFAULT_TIMER, remainingTime }) {
   const fullWidth = 100
   const progressWidth = fullWidth / (DEFAULT_TIMER / remainingTime)
