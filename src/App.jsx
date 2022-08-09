@@ -4,15 +4,16 @@ import './App.css'
 
 function App() {
   const DEFAULT_TIMER = 15
-  const [randomQuoteData, setRandomQuoteData] = useState({
-    author: 'Gail Sheehy',
+  const [selectedQuoteData, setSelectedQuoteData] = useState({
+    author: '',
     id: null,
     profession: '',
-    quote: 'Growth demands a temporary surrender of security',
+    quote: '',
     backgroundImageURL:
       'https://images.unsplash.com/photo-1563089145-599997674d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTk4NDM1ODg&ixlib=rb-1.2.1&q=80&w=1080',
   })
   const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
+  const [quotesDataCopy, setQuotesDataCopy] = useState([])
   const [imagesData, setImagesData] = useState(
     JSON.parse(localStorage.getItem('imagesData')) || null
   )
@@ -23,13 +24,13 @@ function App() {
       const res = await fetch(`https://adams-quote-api-v1.herokuapp.com/quotes`)
       const data = await res.json()
       setAllQuotesDataFromAPI(data)
+      setQuotesDataCopy(data)
     }
     getQuotesFromAPI()
   }, [])
 
   useEffect(() => {
     if (!imagesData) {
-      // console.log('calling images API')
       async function getImagesFromAPI() {
         const res = await fetch(
           `https://api.unsplash.com/photos/random/?client_id=RyjdpW1hxq8mSR8fAHEE8pUNx38fSXjgdnd0UeBCVu4&query=abstract&count=30`
@@ -44,6 +45,12 @@ function App() {
   useEffect(() => {
     localStorage.setItem('imagesData', JSON.stringify(imagesData))
   }, [imagesData])
+
+  useEffect(() => {
+    if (allQuotesDataFromAPI.length) {
+      handleGetRandomQuote()
+    }
+  }, [allQuotesDataFromAPI])
 
   useEffect(() => {
     if (!imagesData) {
@@ -65,22 +72,28 @@ function App() {
   }, [imagesData, remainingTime])
 
   function handleGetRandomQuote() {
-    const randomQuoteData =
-      allQuotesDataFromAPI[
-        Math.floor(Math.random() * allQuotesDataFromAPI.length)
-      ]
+    if (quotesDataCopy.length - 1 === 0) {
+      setQuotesDataCopy(allQuotesDataFromAPI)
+    }
+    const randomNumber = Math.floor(Math.random() * quotesDataCopy.length)
+    const selectedQuoteData = quotesDataCopy[randomNumber]
 
-    setRandomQuoteData((prevData) => {
+    setSelectedQuoteData((prevData) => {
       return {
         ...prevData,
-        author: randomQuoteData.author ? randomQuoteData.author : '',
-        id: randomQuoteData.id,
-        profession: randomQuoteData.profession
-          ? randomQuoteData.profession
+        author: selectedQuoteData.author ? selectedQuoteData.author : '',
+        id: selectedQuoteData.id,
+        profession: selectedQuoteData.profession
+          ? selectedQuoteData.profession
           : '',
-        quote: randomQuoteData.quote,
+        quote: selectedQuoteData.quote,
       }
     })
+
+    setQuotesDataCopy((prevData) => {
+      return prevData.filter((item) => item !== selectedQuoteData)
+    })
+
     setRemainingTime(DEFAULT_TIMER)
   }
 
@@ -88,7 +101,7 @@ function App() {
     const randomImage =
       imagesData[Math.floor(Math.random() * imagesData.length)]
     const randomImageURL = randomImage.urls.regular
-    setRandomQuoteData((prevData) => {
+    setSelectedQuoteData((prevData) => {
       return {
         ...prevData,
         backgroundImageURL: randomImageURL,
@@ -107,16 +120,16 @@ function App() {
       />
       <main
         style={{
-          backgroundImage: `url(${randomQuoteData.backgroundImageURL})`,
+          backgroundImage: `url(${selectedQuoteData.backgroundImageURL})`,
         }}
       >
         <div className='quoteContainer'>
-          <h1 className='quote'>{randomQuoteData.quote}</h1>
-          {randomQuoteData.author && (
-            <p className='quoteAuthor'>{randomQuoteData.author}</p>
+          <h1 className='quote'>{selectedQuoteData.quote}</h1>
+          {selectedQuoteData.author && (
+            <p className='quoteAuthor'>{selectedQuoteData.author}</p>
           )}
-          {randomQuoteData.profession && (
-            <p className='quoteProfession'>{randomQuoteData.profession}</p>
+          {selectedQuoteData.profession && (
+            <p className='quoteProfession'>{selectedQuoteData.profession}</p>
           )}
         </div>
       </main>

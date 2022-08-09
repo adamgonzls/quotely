@@ -8,7 +8,7 @@ export default function ProgressIndicator({ DEFAULT_TIMER, remainingTime }) {
         className='progressIndicator'
         style={{
           width: `${progressWidth}%`,
-          backgroundColor: 'rgba(255, 0, 0, 0.75)',
+          backgroundColor: 'hsla(340, 71%, 47%, .75)',
           height: '.25em',
           transition: 'width .9s ease',
         }}

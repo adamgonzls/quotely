@@ -1,6 +1,8 @@
 :root {
   --white: #fff;
   --off-white: #ccc;
+  --theme-color: hsla(340, 71%, 47%, 0.75);
+  --theme-color-alt: hsla(340, 36%, 57%, 0.25);
   --see-through-black: rgba(0, 0, 0, 0.55);
   --ff-header: 'Cabin', sans-serif;
   --ff-body: 'Roboto', sans-serif;
@@ -62,8 +64,8 @@ main {
   background-color: var(--see-through-black);
   background-image: linear-gradient(
     to top right,
-    rgba(255, 0, 0, 0.25),
-    rgba(200, 0, 200, 0.75)
+    var(--theme-color),
+    var(--theme-color-alt)
   );
   color: var(--white);
 }
@@ -95,7 +97,7 @@ main {
   color: var(--off-white);
   visibility: hidden;
   opacity: 0;
-  background-color: rgba(255, 0, 0, 0.25);
+  background-color: var(--theme-color);
   cursor: pointer;
   transition: all 1s ease;
   box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
