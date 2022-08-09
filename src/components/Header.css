@@ -6,8 +6,42 @@ header {
 }
 
 .buttonContainer {
-  padding-left: var(--content-padding);
-  padding-right: var(--content-padding);
   display: flex;
   gap: 0.25em;
+}
+
+.userArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
+}
+
+.usageNotification {
+  animation: slideIn ease 7s;
+  animation-iteration-count: 1;
+  border-radius: 7px;
+  padding: 1em;
+  background-color: var(--theme-color);
+  box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
+  transform: translateX(calc(100vh));
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(calc(-100vh));
+  }
+  25% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vh));
+  }
 }

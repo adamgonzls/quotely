@@ -41,6 +41,7 @@ h1 {
 p {
   margin: 0;
   font-size: var(--paragraph);
+  color: var(--white);
 }
 
 main {
