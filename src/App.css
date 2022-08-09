@@ -11,6 +11,7 @@
   --h1-width: 100%;
   --paragraph: 0.75em;
   --sm-paragraph: 0.65em;
+  --button-text: 1rem;
 }
 
 @media screen and (min-width: 500px) {
@@ -31,6 +32,10 @@
     --paragraph: 1.15em;
     --sm-paragraph: 0.85em;
   }
+}
+
+.App {
+  background-color: var(--theme-color);
 }
 
 h1 {
@@ -94,7 +99,7 @@ main {
   border-radius: 7px;
   padding: 0.5em;
   font-family: var(--ff-body);
-  font-size: var(--sm-paragraph);
+  font-size: var(--button-text);
   color: var(--off-white);
   visibility: hidden;
   opacity: 0;

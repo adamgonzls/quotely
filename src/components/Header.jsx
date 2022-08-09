@@ -22,13 +22,13 @@ export default function Header({
             New image
           </button>
         </div>
-        {/* <div className='usageNotification'>
+        <div className='usageNotification'>
           <p>
             A new quote will appear every 15 seconds
             <br />
-            hover above to get another quote
+            Use the buttons above to get another quote
           </p>
-        </div> */}
+        </div>
       </div>
     </header>
   )

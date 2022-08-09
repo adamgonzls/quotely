@@ -71,6 +71,12 @@ function App() {
     }
   }, [imagesData, remainingTime])
 
+  // useEffect(() => {
+  //   console.log('selected quote data changed')
+  //   const mainContainer = document.getElementById('mainContainer')
+  //   mainContainer.className.add('fadeImage')
+  // }, [selectedQuoteData])
+
   function handleGetRandomQuote() {
     if (quotesDataCopy.length - 1 === 0) {
       setQuotesDataCopy(allQuotesDataFromAPI)
@@ -119,8 +125,11 @@ function App() {
         remainingTime={remainingTime}
       />
       <main
+        id='mainContainer'
         style={{
           backgroundImage: `url(${selectedQuoteData.backgroundImageURL})`,
+          // opacity: remainingTime <= 3 ? 0 : 1,
+          // transition: remainingTime <= 3 && 'opacity 3s ease-in-out',
         }}
       >
         <div className='quoteContainer'>

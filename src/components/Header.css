@@ -24,29 +24,30 @@ header {
 }
 
 .usageNotification {
-  animation: slideIn ease 7s;
-  animation-iteration-count: 1;
   border-radius: 7px;
   padding: 1em;
+  color: var(--off-white);
   background-color: var(--theme-color);
+  animation: slideDown ease 8s;
+  animation-iteration-count: 1;
   box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
   transform: translateX(calc(100vw));
 }
 
-@keyframes slideIn {
+@keyframes slideDown {
   0% {
-    transform: translateX(calc(-100vw));
+    transform: translateY(calc(-100vh));
   }
   25% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   50% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   75% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   100% {
-    transform: translateX(calc(100vw));
+    transform: translateY(calc(-100vh));
   }
 }
