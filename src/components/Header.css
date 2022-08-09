@@ -6,8 +6,48 @@ header {
 }
 
 .buttonContainer {
-  padding-left: var(--content-padding);
-  padding-right: var(--content-padding);
   display: flex;
   gap: 0.25em;
+}
+
+.buttonContainer:hover > .brandButton {
+  opacity: 1;
+  visibility: visible;
+}
+
+.userArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
+}
+
+.usageNotification {
+  border-radius: 7px;
+  padding: 1em;
+  color: var(--off-white);
+  background-color: var(--theme-color);
+  animation: slideDown ease 8s;
+  animation-iteration-count: 1;
+  box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
+  transform: translateX(calc(100vw));
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(calc(-100vh));
+  }
+  25% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-100vh));
+  }
 }

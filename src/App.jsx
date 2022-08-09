@@ -119,6 +119,7 @@ function App() {
         remainingTime={remainingTime}
       />
       <main
+        id='mainContainer'
         style={{
           backgroundImage: `url(${selectedQuoteData.backgroundImageURL})`,
         }}

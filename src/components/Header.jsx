@@ -13,13 +13,22 @@ export default function Header({
         DEFAULT_TIMER={DEFAULT_TIMER}
         remainingTime={remainingTime}
       />
-      <div className='buttonContainer'>
-        <button className='brandButton' onClick={handleGetRandomQuote}>
-          New quote
-        </button>
-        <button className='brandButton' onClick={handleGetRandomImage}>
-          New image
-        </button>
+      <div className='userArea'>
+        <div className='buttonContainer'>
+          <button className='brandButton' onClick={handleGetRandomQuote}>
+            New quote
+          </button>
+          <button className='brandButton' onClick={handleGetRandomImage}>
+            New image
+          </button>
+        </div>
+        <div className='usageNotification'>
+          <p>
+            A new quote will appear every 15 seconds
+            <br />
+            Use the buttons above to get another quote
+          </p>
+        </div>
       </div>
     </header>
   )
