@@ -10,6 +10,11 @@ header {
   gap: 0.25em;
 }
 
+.buttonContainer:hover > .brandButton {
+  opacity: 1;
+  visibility: visible;
+}
+
 .userArea {
   display: flex;
   flex-direction: column;
@@ -25,12 +30,12 @@ header {
   padding: 1em;
   background-color: var(--theme-color);
   box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
-  transform: translateX(calc(100vh));
+  transform: translateX(calc(100vw));
 }
 
 @keyframes slideIn {
   0% {
-    transform: translateX(calc(-100vh));
+    transform: translateX(calc(-100vw));
   }
   25% {
     transform: translateX(0);
@@ -42,6 +47,6 @@ header {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(100vh));
+    transform: translateX(calc(100vw));
   }
 }
