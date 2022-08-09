@@ -107,7 +107,7 @@ main {
   cursor: pointer;
   transition: all 1s ease;
   box-shadow: 0.2em 0.2em 0.2em rgba(1, 1, 1, 0.5);
-  animation: fadeOut 6s ease, pulse-black 2s ease 3;
+  animation: fadeOut 10s ease, pulse-black 2s ease 5;
 }
 
 .brandButton:hover,
