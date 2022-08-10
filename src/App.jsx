@@ -5,14 +5,14 @@ import './App.css'
 function App() {
   const DEFAULT_TIMER = 15
   const [selectedQuoteData, setSelectedQuoteData] = useState({
-    author: 'Malcolm Forbes',
-    id: 19,
-    profession: 'American magazine publisher',
-    quote:
-      'Too many people overvalue what they are not and undervalue what they are.',
+    author: '',
+    id: null,
+    profession: '',
+    quote: '',
     backgroundImageURL:
       'https://images.unsplash.com/photo-1563089145-599997674d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTk4NDM1ODg&ixlib=rb-1.2.1&q=80&w=1080',
   })
+  const [isLoading, setIsLoading] = useState(true)
   const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
   const [quotesDataCopy, setQuotesDataCopy] = useState([])
   const [imagesData, setImagesData] = useState(
@@ -26,6 +26,7 @@ function App() {
       const data = await res.json()
       setAllQuotesDataFromAPI(data)
       setQuotesDataCopy(data)
+      setIsLoading(false)
     }
     getQuotesFromAPI()
   }, [])
@@ -125,15 +126,19 @@ function App() {
           backgroundImage: `url(${selectedQuoteData.backgroundImageURL})`,
         }}
       >
-        <div className='quoteContainer'>
-          <h1 className='quote'>{selectedQuoteData.quote}</h1>
-          {selectedQuoteData.author && (
-            <p className='quoteAuthor'>{selectedQuoteData.author}</p>
-          )}
-          {selectedQuoteData.profession && (
-            <p className='quoteProfession'>{selectedQuoteData.profession}</p>
-          )}
-        </div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className='quoteContainer'>
+            <h1 className='quote'>{selectedQuoteData.quote}</h1>
+            {selectedQuoteData.author && (
+              <p className='quoteAuthor'>{selectedQuoteData.author}</p>
+            )}
+            {selectedQuoteData.profession && (
+              <p className='quoteProfession'>{selectedQuoteData.profession}</p>
+            )}
+          </div>
+        )}
       </main>
     </div>
   )

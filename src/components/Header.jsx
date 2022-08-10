@@ -24,9 +24,9 @@ export default function Header({
         </div>
         <div className='usageNotification'>
           <p>
-            A new quote will appear every 15 seconds
+            A new quote will appear automatically every 15 seconds.
             <br />
-            Use the buttons above to get another quote
+            Hover/tap above to show the buttons to get another quote.
           </p>
         </div>
       </div>

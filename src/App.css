@@ -9,7 +9,7 @@
   --content-padding: 2em;
   --h1: 1.5em;
   --h1-width: 100%;
-  --paragraph: 0.75em;
+  --paragraph: 1em;
   --sm-paragraph: 0.65em;
   --button-text: 1rem;
 }
@@ -85,7 +85,7 @@ main {
 }
 
 .quoteAuthor:not(:last-child) {
-  margin-bottom: 1em;
+  margin-bottom: 0.45em;
 }
 
 .quoteProfession {
