@@ -1,31 +1,35 @@
-import { useState, useEffect } from 'react'
-import Header from './components/Header.jsx'
-import './App.css'
+import { useState, useEffect } from "react"
+import Header from "./components/Header.jsx"
+import "./App.css"
 
 function App() {
   const DEFAULT_TIMER = 15
   const [selectedQuoteData, setSelectedQuoteData] = useState({
-    author: 'Malcolm Forbes',
+    author: "Malcolm Forbes",
     id: 19,
-    profession: 'American magazine publisher',
+    profession: "American magazine publisher",
     quote:
-      'Too many people overvalue what they are not and undervalue what they are.',
+      "Too many people overvalue what they are not and undervalue what they are.",
     backgroundImageURL:
-      'https://images.unsplash.com/photo-1563089145-599997674d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTk4NDM1ODg&ixlib=rb-1.2.1&q=80&w=1080',
+      "https://images.unsplash.com/photo-1563089145-599997674d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDU3MzJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTk4NDM1ODg&ixlib=rb-1.2.1&q=80&w=1080",
   })
   const [allQuotesDataFromAPI, setAllQuotesDataFromAPI] = useState([])
   const [quotesDataCopy, setQuotesDataCopy] = useState([])
   const [imagesData, setImagesData] = useState(
-    JSON.parse(localStorage.getItem('imagesData')) || null
+    JSON.parse(localStorage.getItem("imagesData")) || null
   )
   const [remainingTime, setRemainingTime] = useState(DEFAULT_TIMER)
 
   useEffect(() => {
     async function getQuotesFromAPI() {
-      const res = await fetch(`https://adams-quote-api-v1.herokuapp.com/quotes`)
+      const res = await fetch(
+        `https://cdn.jsdelivr.net/gh/adamgonzls/quote-api@main/db.json`
+      )
       const data = await res.json()
-      setAllQuotesDataFromAPI(data)
-      setQuotesDataCopy(data)
+      const { quotes } = data
+      console.log(quotes)
+      setAllQuotesDataFromAPI(quotes)
+      setQuotesDataCopy(quotes)
     }
     getQuotesFromAPI()
   }, [])
@@ -44,7 +48,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('imagesData', JSON.stringify(imagesData))
+    localStorage.setItem("imagesData", JSON.stringify(imagesData))
   }, [imagesData])
 
   useEffect(() => {
@@ -82,11 +86,11 @@ function App() {
     setSelectedQuoteData((prevData) => {
       return {
         ...prevData,
-        author: selectedQuoteData.author ? selectedQuoteData.author : '',
+        author: selectedQuoteData.author ? selectedQuoteData.author : "",
         id: selectedQuoteData.id,
         profession: selectedQuoteData.profession
           ? selectedQuoteData.profession
-          : '',
+          : "",
         quote: selectedQuoteData.quote,
       }
     })
@@ -112,7 +116,7 @@ function App() {
   }
 
   return (
-    <div className='App'>
+    <div className="App">
       <Header
         handleGetRandomQuote={handleGetRandomQuote}
         handleGetRandomImage={handleGetRandomImage}
@@ -120,18 +124,18 @@ function App() {
         remainingTime={remainingTime}
       />
       <main
-        id='mainContainer'
+        id="mainContainer"
         style={{
           backgroundImage: `url(${selectedQuoteData.backgroundImageURL})`,
         }}
       >
-        <div className='quoteContainer'>
-          <h1 className='quote'>{selectedQuoteData.quote}</h1>
+        <div className="quoteContainer">
+          <h1 className="quote">{selectedQuoteData.quote}</h1>
           {selectedQuoteData.author && (
-            <p className='quoteAuthor'>{selectedQuoteData.author}</p>
+            <p className="quoteAuthor">{selectedQuoteData.author}</p>
           )}
           {selectedQuoteData.profession && (
-            <p className='quoteProfession'>{selectedQuoteData.profession}</p>
+            <p className="quoteProfession">{selectedQuoteData.profession}</p>
           )}
         </div>
       </main>
